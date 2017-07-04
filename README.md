@@ -1,0 +1,1 @@
+This is a my implementation of the short-lnk project from udemy's react and meteor course.
