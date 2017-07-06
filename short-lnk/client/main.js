@@ -11,6 +11,8 @@ import Link from './../imports/ui/Link';
 import NotFound from './../imports/ui/NotFound';
 import Login from './../imports/ui/Login';
 
+window.browserHistory = browserHistory;
+
 let routes = (
   <Router history={browserHistory}>
     <Route path='/' component={Login} />
@@ -21,5 +23,5 @@ let routes = (
 );
 
 Meteor.startup(() => {
-  ReactDOM.render(routes, document.getElementById('app'));
+  ReactDOM.render(<div><h1>Short Lnk</h1><div>{routes}</div></div>, document.getElementById('app'));
 });
