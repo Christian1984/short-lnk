@@ -59,7 +59,7 @@ export default class Signup extends React.Component {
             <input type='password' name='password' placeholder='Password' onChange={this.checkPassword.bind(this)} />
             {!this.state.passwordOkay ? <span>password should be at least 6 characters long</span> : undefined}
           </div>
-          {this.state.passwordOkay ? <button>Create Account</button> : <button disabled>Create Account</button>}
+          <button disabled={!this.state.passwordOkay}>Create Account</button>
         </form>
         <div>Already have an Account yet? <Link to='/'>Login here!</Link></div>
       </div>
