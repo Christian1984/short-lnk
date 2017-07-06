@@ -27,7 +27,7 @@ export default class Signup extends React.Component {
     let pw = e.target.value;
     console.log(pw.length);
 
-    if (pw.length <= 0) {
+    if (pw.length <= 6) {
       this.setState ({passwordOkay: false});
     }
     else {
@@ -57,9 +57,9 @@ export default class Signup extends React.Component {
           </div>
           <div>
             <input type='password' name='password' placeholder='Password' onChange={this.checkPassword.bind(this)} />
-            <span>{this.state.passwordOkay ? 'password okay'  : 'please enter a password' }</span>
+            {!this.state.passwordOkay ? <span>password should be at least 6 characters long</span> : undefined}
           </div>
-          <button>Create Account</button>
+          {this.state.passwordOkay ? <button>Create Account</button> : <button disabled>Create Account</button>}
         </form>
         <div>Already have an Account yet? <Link to='/'>Login here!</Link></div>
       </div>
