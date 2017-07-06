@@ -7,8 +7,32 @@ export default class Signup extends React.Component {
     super(props);
 
     this.state = {
-      count: 0
+      error: ''
     };
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    console.log(e.target.email.value);
+    console.log(e.target.password.value);
+
+    this.setState({
+      error: 'something went wrong',
+      passwordOkay: false
+    });
+  }
+
+  checkPassword(e) {
+    let pw = e.target.value;
+    console.log(pw.length);
+
+    if (pw.length <= 0) {
+      this.setState ({passwordOkay: false});
+    }
+    else {
+      this.setState ({passwordOkay: true});
+    }
   }
 
   countUp() {
@@ -22,27 +46,21 @@ export default class Signup extends React.Component {
     });
   }
 
-  countDown() {
-    this.setState({
-      count: this.state.count - 1
-    },
-    () => {
-      console.log('countDown-callback called');
-      console.log(this.state.count);
-    });
-  }
-
   render() {
     return (
       <div>
         <h2>Signup For a New Short Lnk Account</h2>
-        <div>//TODO: signup form goes here!</div>
-        <div>
-          <span>Counter: </span>
-          <span>{this.state.count}</span>
-          <button onClick={this.countDown.bind(this)}>-1</button>
-          <button onClick={this.countUp.bind(this)}>+1</button>
-        </div>
+        {this.state.error ? <div>Error: {this.state.error}</div> : undefined}
+        <form onSubmit={this.onSubmit.bind(this)}>
+          <div>
+            <input type='email' name='email' placeholder='Your Best Email' />
+          </div>
+          <div>
+            <input type='password' name='password' placeholder='Password' onChange={this.checkPassword.bind(this)} />
+            <span>{this.state.passwordOkay ? 'password okay'  : 'please enter a password' }</span>
+          </div>
+          <button>Create Account</button>
+        </form>
         <div>Already have an Account yet? <Link to='/'>Login here!</Link></div>
       </div>
     );
