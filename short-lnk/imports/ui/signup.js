@@ -1,25 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
+import { Accounts } from 'meteor/accounts-base';
 
 export default class Signup extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      error: ''
+      error: '',
+      passwordOkay: false
     };
   }
 
   onSubmit(e) {
     e.preventDefault();
 
-    console.log(e.target.email.value);
-    console.log(e.target.password.value);
+    let email = e.target.email.value;
+    let password = e.target.password.value;
 
-    this.setState({
-      error: 'something went wrong',
-      passwordOkay: false
+    Accounts.createUser({
+      email, password
+    }, (err) => {
+      if (!err) {
+        console.log('user created successfully')
+      } 
+      else {
+        this.setState({
+          error: 'something went wrong: ' + err.message
+        });
+
+        console.log(err);
+      }
     });
   }
 
