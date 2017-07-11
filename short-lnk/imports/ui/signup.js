@@ -9,6 +9,7 @@ export default class Signup extends React.Component {
 
     this.state = {
       error: '',
+      success: false,
       passwordOkay: false
     };
   }
@@ -23,11 +24,17 @@ export default class Signup extends React.Component {
       email, password
     }, (err) => {
       if (!err) {
+        this.setState({
+          error: undefined,
+          success: true
+        });
+
         console.log('user created successfully')
       } 
       else {
         this.setState({
-          error: 'something went wrong: ' + err.message
+          error: 'something went wrong: ' + err.message,
+          success: false
         });
 
         console.log(err);
@@ -63,6 +70,7 @@ export default class Signup extends React.Component {
       <div>
         <h2>Signup For a New Short Lnk Account</h2>
         {this.state.error ? <div>Error: {this.state.error}</div> : undefined}
+        {this.state.success ? <div>Success!</div> : undefined}
         <form onSubmit={this.onSubmit.bind(this)}>
           <div>
             <input type='email' name='email' placeholder='Your Best Email' />
@@ -73,7 +81,7 @@ export default class Signup extends React.Component {
           </div>
           <button disabled={!this.state.passwordOkay}>Create Account</button>
         </form>
-        <div>Already have an Account yet? <Link to='/'>Login here!</Link></div>
+        <div>Already have an Account? <Link to='/'>Login here!</Link></div>
       </div>
     );
   }
