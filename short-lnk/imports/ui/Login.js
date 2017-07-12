@@ -4,18 +4,43 @@ import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router';
 
 export default class Login extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      error: '',
+      success: false,
+      passwordOkay: false
+    };
+  }
+
   onSubmit(e) {
     e.preventDefault();
     
-    let u = e.target.email.value.trim();
-    let p = e.target.password.value;
-    Meteor.loginWithPassword(u, p, (err) => {console.log(err)});
+    let email = e.target.email.value.trim();
+    let pw = e.target.password.value.trim();
+
+    Meteor.loginWithPassword({email}, pw, (err) => {
+      console.log(err);
+
+      if (err) {
+        this.setState({
+          error: 'Unable to login. Check Email and Password!', //err.reason, 
+          success: false
+        });
+        return;
+      }
+      
+      this.setState({error: '', success: true});
+    });
   }
 
   render() {
     return (
       <div>
         <h2>Login to your Short Lnk Account</h2>
+        {this.state.error ? <div>Error: {this.state.error}</div> : undefined}
+        {this.state.success ? <div>Success!</div> : undefined}
         <form onSubmit={this.onSubmit.bind(this)}>
           <div>
             <input type='email' name='email' placeholder='Email' />
