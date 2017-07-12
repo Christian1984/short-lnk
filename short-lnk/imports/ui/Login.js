@@ -43,7 +43,7 @@ export default class Login extends React.Component {
         {this.state.success ? <div>Success!</div> : undefined}
         <form onSubmit={this.onSubmit.bind(this)}>
           <div>
-            <input type='email' name='email' placeholder='Email' />
+            <input type='text' name='email' placeholder='Email' />
           </div>
           <div>
             <input type='password' name='password' placeholder='Password' />

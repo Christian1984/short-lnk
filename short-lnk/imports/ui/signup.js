@@ -20,6 +20,11 @@ export default class Signup extends React.Component {
     let email = e.target.email.value.trim();
     let password = e.target.password.value.trim();
 
+    if (password.length < 6) {
+      this.setState({err: 'Password must be at least 6 characters long!', success: false});
+      return;
+    }
+
     Accounts.createUser({
       email, password
     }, (err) => {
@@ -42,7 +47,7 @@ export default class Signup extends React.Component {
     let pw = e.target.value;
     console.log(pw.length);
 
-    if (pw.length <= 6) {
+    if (pw.length < 6) {
       this.setState ({passwordOkay: false});
     }
     else {
@@ -69,7 +74,7 @@ export default class Signup extends React.Component {
         {this.state.success ? <div>Success!</div> : undefined}
         <form onSubmit={this.onSubmit.bind(this)}>
           <div>
-            <input type='email' name='email' placeholder='Your Best Email' />
+            <input type='text' name='email' placeholder='Your Best Email' />
           </div>
           <div>
             <input type='password' name='password' placeholder='Password' onChange={this.checkPassword.bind(this)} />
