@@ -15,19 +15,16 @@ if (Meteor.isServer) {
 }*/
 
 Meteor.methods({
-  greetUser(name) {
-    console.log('greetUser method running!');
-
-    if (!name) {
-      throw new Meteor.Error(400, 'No username provided');
+  'links.insert'(url) {
+    if (!this.userId) {
+      throw new Meteor.Error(403, 'Cannot insert to database. User not authorized!');
     }
 
-    return `Hello ${name}!`;
-  },
-  addNumbers(a, b) {
-    if (typeof a !== 'number' || typeof b !== 'number') {
-      throw new Meteor.Error(400, 'Arguments must be numbers'); 
-    }
-    return a + b;
+    LinksCollection.insert({
+      userId: this.userId,
+      url
+    });
+
+    return 'Link inserted successfully';
   }
 });

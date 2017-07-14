@@ -17,11 +17,10 @@ export default class Link extends React.Component {
     e.preventDefault();
 
     let url = this.refs.url.value;
-    let userId = Meteor.userId();
-
-    LinksCollection.insert({url, userId});
-
-    this.refs.url.value = '';
+    Meteor.call('links.insert', url, (err, res) => {
+      this.refs.url.value = '';
+      console.log('insert callback -> err:', err, ', res:', res);
+    });
   }
 
   render() {
