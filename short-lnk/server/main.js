@@ -5,7 +5,7 @@ import { LinksCollection } from './../imports/api/Links';
 
 
 Meteor.startup(() => {
-  Meteor.call('greetUser', (err, res) => {
+  Meteor.call('greetUser', 'ServerChris', (err, res) => {
     console.log('Greet User Callback -> err:', err, ', res:', res);
   });
 });

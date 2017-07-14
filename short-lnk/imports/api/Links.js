@@ -15,8 +15,8 @@ if (Meteor.isServer) {
 }*/
 
 Meteor.methods({
-  greetUser() {
+  greetUser(name = 'User') {
     console.log('greetUser method running!');
-    return 'Hello User!';
+    return `Hello ${name}!`;
   }
 });
