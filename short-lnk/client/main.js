@@ -13,4 +13,8 @@ Meteor.startup(() => {
     let isAuthenticated = !!Meteor.userId();
     onAuthChange(isAuthenticated);
   });
+  
+  Meteor.call('greetUser', (err, res) => {
+    console.log('Greet User Callback -> err:', err, ', res:', res);
+  });
 });
