@@ -4,11 +4,19 @@ import { Mongo } from 'meteor/mongo';
 export let LinksCollection = new Mongo.Collection('links');
 
 if (Meteor.isServer) {
-  Meteor.publish('links', () => {
-    return LinksCollection.find();
+  Meteor.publish('links', function() {
+    let userId = this.userId;
+    return LinksCollection.find({userId});
   });
 }
 
 /*if (Meteor.isClient) {
   Meteor.subscribe('links');
 }*/
+
+Meteor.methods({
+  greetUser() {
+    console.log('greetUser method running!');
+    return 'Hello User!';
+  }
+});

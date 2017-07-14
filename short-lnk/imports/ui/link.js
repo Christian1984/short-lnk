@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Meteor } from 'meteor/meteor';
+
 import { Accounts } from 'meteor/accounts-base'
 import { LinksCollection } from './../api/Links';
 
@@ -14,8 +16,10 @@ export default class Link extends React.Component {
   onFormSubmit(e) {
     e.preventDefault();
 
-    url = this.refs.url.value;
-    LinksCollection.insert({url});
+    let url = this.refs.url.value;
+    let userId = Meteor.userId();
+
+    LinksCollection.insert({url, userId});
 
     this.refs.url.value = '';
   }
