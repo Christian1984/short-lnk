@@ -7,9 +7,12 @@ import './../imports/startup/simple-schema-configuration';
 
 Meteor.startup(() => {
   WebApp.connectHandlers.use((req, res, next) => {
+    res.statusCode = 302;
+    res.setHeader('location', 'http://google.com');
+    /*
     console.log('This is from my custom middleware!');
     console.log(req.url, req.method, req.headers, req.query);
-    
+
     //set http status code
     res.statusCode = 404;
 
@@ -21,6 +24,7 @@ Meteor.startup(() => {
 
     //end http request
     res.end();
+    */
 
     next();
   });
