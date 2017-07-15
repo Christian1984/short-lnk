@@ -7,32 +7,14 @@ import './../imports/startup/simple-schema-configuration';
 
 Meteor.startup(() => {
   WebApp.connectHandlers.use((req, res, next) => {
-    let urlId = req.url.substring(1, req.url.length);
-    let urls = LinksCollection.find({_id: urlId}).fetch();
+    let urlId = req.url.slice(1);
+    let link = LinksCollection.findOne({_id: urlId});
 
-    if (urls.length == 1) {
-      let url = urls[0].url;
-
+    if (link) {
       res.statusCode = 302;
-      res.setHeader('location', url);
+      res.setHeader('location', link.url);
+      res.end();
     }
-
-    /*
-    console.log('This is from my custom middleware!');
-    console.log(req.url, req.method, req.headers, req.query);
-
-    //set http status code
-    res.statusCode = 404;
-
-    //set http headers
-    res.setHeader('my-custom-header', 'chris was here :-)');
-
-    //set http body
-    res.write('<h1>This is MY house!!!</h1>');
-
-    //end http request
-    res.end();
-    */
 
     next();
   });
