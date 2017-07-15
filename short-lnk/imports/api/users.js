@@ -8,15 +8,7 @@ let accountSchema = new SimpleSchema({
 
 Accounts.validateNewUser((user) => {
   let email = user.emails[0].address;
-
-  try {
-    accountSchema.validate({ email });
-  }
-  catch(e) {
-    //console.log(e);
-    //console.log(e.details[0].message);
-    throw new Meteor.Error(400, e.message);
-  }
+  accountSchema.validate({ email });
 
   return true;
 });

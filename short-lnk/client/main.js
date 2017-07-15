@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Tracker } from 'meteor/tracker';
+import './../imports/startup/simple-schema-configuration';
 
 import ReactDOM from 'react-dom';
 
