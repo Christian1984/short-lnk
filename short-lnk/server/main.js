@@ -7,8 +7,16 @@ import './../imports/startup/simple-schema-configuration';
 
 Meteor.startup(() => {
   WebApp.connectHandlers.use((req, res, next) => {
-    res.statusCode = 302;
-    res.setHeader('location', 'http://google.com');
+    let urlId = req.url.substring(1, req.url.length);
+    let urls = LinksCollection.find({_id: urlId}).fetch();
+
+    if (urls.length == 1) {
+      let url = urls[0].url;
+
+      res.statusCode = 302;
+      res.setHeader('location', url);
+    }
+
     /*
     console.log('This is from my custom middleware!');
     console.log(req.url, req.method, req.headers, req.query);
