@@ -18,8 +18,11 @@ export default class Link extends React.Component {
 
     let url = this.refs.url.value;
     Meteor.call('links.insert', url, (err, res) => {
-      this.refs.url.value = '';
       console.log('insert callback -> err:', err, ', res:', res);
+
+      if (!err) {
+        this.refs.url.value = '';
+      }
     });
   }
 
