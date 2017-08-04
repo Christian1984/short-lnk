@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { LinksCollection } from './../api/Links';
 
-import LinkItem from './LinkItem';
+import LinksListItem from './LinksListItem';
 
 export default class LinksList extends React.Component {
   constructor(props) {
@@ -27,7 +27,7 @@ export default class LinksList extends React.Component {
   }
 
   renderListItems() {
-    return this.state.links.map((link) => <LinkItem key={link._id} link={link} />);
+    return this.state.links.map((link) => <LinksListItem key={link._id} link={link} />);
   }
 
   render() {
