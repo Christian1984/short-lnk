@@ -1,10 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-export default class NotFound extends React.Component {
-  render() {
-    return <p>Not Found Component Here!</p>;
-  }
+export default () => {
+  return (
+    <div>
+      <h1>Sorry, There's Nothing Here!</h1>
+      <a href='/'>Go Home...</a>
+    </div>
+  );
 };
-
-NotFound.proptypes = {};

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { Accounts } from 'meteor/accounts-base';
 
@@ -87,5 +86,3 @@ export default class Signup extends React.Component {
     );
   }
 };
-
-Signup.proptypes = {};

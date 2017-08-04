@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router';
 
@@ -55,5 +54,3 @@ export default class Login extends React.Component {
     );
   }
 };
-
-Login.proptypes = {};
