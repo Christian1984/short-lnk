@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import Clipboard from 'clipboard';
 
+import { LinksCollection } from './../api/Links';
+
 export default class LinksListItem extends React.Component {
   constructor(props) {
     super(props);
@@ -16,9 +18,9 @@ export default class LinksListItem extends React.Component {
     this.clipboard = new Clipboard(this.refs.copy);
 
     this.clipboard.on('success', (e) => {
-      this.setState({copied: true});
+      this.setState({ copied: true });
       setTimeout(() => {
-        this.setState({copied: false});
+        this.setState({ copied: false });
       }, 1000)
     });
 
@@ -32,14 +34,25 @@ export default class LinksListItem extends React.Component {
     this.clipboard.destroy();
   }
 
+  onHideClicked() {
+    Meteor.call(
+      'links.setVisibility', 
+      this.props.link._id, !this.props.link.visible, 
+      (err, res) => {
+        console.log('insert callback -> err:', err, ', res:', res);
+      }
+    );
+  }
+
   render() {
     let url = Meteor.absoluteUrl(this.props.link._id);
 
     return (
       <div>
-        <p><a href={this.props.link.url}>{this.props.link.url}</a></p>
+        <p><a href={ this.props.link.url }>{ this.props.link.url }</a></p>
         <p>{url}</p>
         <button ref='copy' data-clipboard-text={url}>{ this.state.copied ? 'Copied' : 'Copy' }</button>
+        <button ref='copy' onClick={ this.onHideClicked.bind(this) }>{ this.props.link.visible ? 'Hide' : 'Unhide'}</button>
       </div>
     );
   }

@@ -1,4 +1,6 @@
 import { Tracker } from 'meteor/tracker';
+import { Session } from 'meteor/session';
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -15,9 +17,12 @@ export default class LinksList extends React.Component {
   }
 
   componentDidMount() {
+    Session.set('showVisibleLinks', true);
     this.linksTracker = Tracker.autorun(() => {
       Meteor.subscribe('links');
-      let links = LinksCollection.find({}).fetch();
+      let links = LinksCollection.find({
+        visible: Session.get('showVisibleLinks')
+      }).fetch();
       this.setState({links});
     });
   }
@@ -35,7 +40,15 @@ export default class LinksList extends React.Component {
 
     return (
       <div>
-        <p>LinksList</p>
+        <label>
+          <input type='checkbox' 
+            ref='visibilityCheckbox' 
+            onClick={() => {
+              Session.set('showVisibleLinks', !this.refs.visibilityCheckbox.checked);
+            }
+          } />
+          Show Hidden Links
+        </label>
         {this.renderListItems()}
       </div>);
   }

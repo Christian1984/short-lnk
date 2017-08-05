@@ -25,11 +25,21 @@ let linkSchema = new SimpleSchema({
   }
 });
 
+let updateVisibilitySchema = new SimpleSchema({
+  _id: {
+    type: String,
+    min: 1
+  },
+  isVisible: {
+    type: Boolean
+  }
+});
+
 Meteor.methods({
   'links.insert'(url) {
     //check if user is authorized
     if (!this.userId) {
-      throw new Meteor.Error(403, 'Cannot insert to database. User not authorized!');
+      throw new Meteor.Error(403, 'Cannot write to database. User not authorized!');
     }
 
     console.log('validating...');
@@ -40,9 +50,23 @@ Meteor.methods({
     LinksCollection.insert({
       _id: shortid.generate(),
       userId: this.userId,
-      url
+      url,
+      visible: true
     });
 
     return 'Link inserted successfully';
+  },
+  'links.setVisibility'(_id, isVisible) {
+    //check if user is authorized
+    if (!this.userId) {
+      throw new Meteor.Error(403, 'Cannot write to database. User not authorized!');
+    }
+
+    updateVisibilitySchema.validate({ _id, isVisible });
+
+    //insert link into db
+    LinksCollection.update({ _id, userId: Meteor.userId }, { $set: { visible: isVisible } });
+
+    return 'Link visibility updated successfully';
   }
 });
