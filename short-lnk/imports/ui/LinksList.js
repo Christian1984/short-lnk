@@ -17,11 +17,11 @@ export default class LinksList extends React.Component {
   }
 
   componentDidMount() {
-    Session.set('showVisibleLinks', true);
+    Session.set('showVisible', true);
     this.linksTracker = Tracker.autorun(() => {
       Meteor.subscribe('links');
       let links = LinksCollection.find({
-        visible: Session.get('showVisibleLinks')
+        visible: Session.get('showVisible')
       }).fetch();
       this.setState({links});
     });
@@ -38,18 +38,6 @@ export default class LinksList extends React.Component {
   render() {
     console.log('render:', this.state.links);
 
-    return (
-      <div>
-        <label>
-          <input type='checkbox' 
-            ref='visibilityCheckbox' 
-            onClick={() => {
-              Session.set('showVisibleLinks', !this.refs.visibilityCheckbox.checked);
-            }
-          } />
-          Show Hidden Links
-        </label>
-        {this.renderListItems()}
-      </div>);
+    return <div>{this.renderListItems()}</div>
   }
 }

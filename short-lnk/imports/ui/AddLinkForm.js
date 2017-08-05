@@ -4,13 +4,20 @@ import React from 'react';
 export default class AddLinkForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { err: undefined }
+    this.state = {
+      url: 'Chris was here',
+      err: undefined 
+    }
+  }
+
+  onUrlChanged(e) {
+    this.setState({ url: e.target.value.trim() });
   }
 
   onFormSubmit(e) {
     e.preventDefault();
 
-    let url = this.refs.url.value;
+    let url = this.state.url;
     Meteor.call('links.insert', url, (err, res) => {
       console.log('insert callback -> err:', err, ', res:', res);
 
@@ -19,7 +26,7 @@ export default class AddLinkForm extends React.Component {
       }
       else {
         this.setState({ err: undefined });
-        this.refs.url.value = '';
+        this.setState({ url: '' });
       }
     });
   }
@@ -36,7 +43,11 @@ export default class AddLinkForm extends React.Component {
         <p>Add Link</p>
         {this.renderError()}
         <form onSubmit={this.onFormSubmit.bind(this)}>
-          <input type='text' name='url' ref='url' placeholder='URL' />
+          <input type='text' 
+            name='url'
+            placeholder='URL' 
+            value={this.state.url}
+            onChange={this.onUrlChanged.bind(this)} />
           <button>Submit</button>
         </form>
       </div>
