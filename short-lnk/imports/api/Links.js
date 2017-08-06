@@ -35,6 +35,13 @@ let updateVisibilitySchema = new SimpleSchema({
   }
 });
 
+let trackLinkSchema = new SimpleSchema({
+  _id: {
+    type: String,
+    min: 1
+  }
+});
+
 Meteor.methods({
   'links.insert'(url) {
     //check if user is authorized
@@ -51,7 +58,9 @@ Meteor.methods({
       _id: shortid.generate(),
       userId: this.userId,
       url,
-      visible: true
+      visible: true,
+      visitedCount: 0,
+      lastVisitedAt: undefined
     });
 
     return 'Link inserted successfully';
@@ -68,5 +77,22 @@ Meteor.methods({
     LinksCollection.update({ _id, userId: Meteor.userId }, { $set: { visible: isVisible } });
 
     return 'Link visibility updated successfully';
+  },
+  'links.trackVisit'(_id) {
+    console.log('links.trackVisit called');
+    trackLinkSchema.validate({ _id });
+    LinksCollection.update(
+      { 
+        _id 
+      }, 
+      { 
+        $inc: { 
+          visitedCount: 1 
+        }, 
+        $set: { 
+          lastVisitedAt: new Date().getTime()
+        } 
+      }
+    );  
   }
 });

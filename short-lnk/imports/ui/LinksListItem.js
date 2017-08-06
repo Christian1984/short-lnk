@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Clipboard from 'clipboard';
+import moment from 'moment';
 
 import { LinksCollection } from './../api/Links';
 
@@ -44,6 +45,17 @@ export default class LinksListItem extends React.Component {
     );
   }
 
+  renderStats() {
+    let visitedCount = this.props.link.visitedCount;
+    let visitedSuffix = visitedCount === 1 ? 'visit' : 'visits';
+
+    let lastVisitedAt = this.props.link.lastVisitedAt;
+    let visitedAtMsg = lastVisitedAt ? `(visited ${moment(lastVisitedAt).fromNow()})` : undefined;
+    return (
+      <p>{visitedCount} {visitedSuffix} {visitedAtMsg}</p>
+    );
+  }
+
   render() {
     let url = Meteor.absoluteUrl(this.props.link._id);
 
@@ -51,8 +63,10 @@ export default class LinksListItem extends React.Component {
       <div>
         <p><a href={ this.props.link.url }>{ this.props.link.url }</a></p>
         <p>{url}</p>
+        {this.renderStats()}
+        <a href={url} target='_blank'>Visit</a>
         <button ref='copy' data-clipboard-text={url}>{ this.state.copied ? 'Copied' : 'Copy' }</button>
-        <button ref='copy' onClick={ this.onHideClicked.bind(this) }>{ this.props.link.visible ? 'Hide' : 'Unhide'}</button>
+        <button ref='hide' onClick={ this.onHideClicked.bind(this) }>{ this.props.link.visible ? 'Hide' : 'Unhide'}</button>
       </div>
     );
   }

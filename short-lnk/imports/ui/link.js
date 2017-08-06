@@ -10,8 +10,8 @@ export default function Link(props) {
     <div>
       <PrivateHeader title='Your Links' />
       <LinksListFilter />
-      <LinksList />
       <AddLinkForm />
+      <LinksList />
     </div>
   );
 }
