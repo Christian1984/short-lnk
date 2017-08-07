@@ -1,10 +1,14 @@
 import React from 'react';
+import {Link} from 'react-router'; 
 
 export default () => {
   return (
-    <div>
-      <h1>Sorry, There's Nothing Here!</h1>
-      <a href='/'>Go Home...</a>
+    <div className='boxed-view'>
+      <div className='boxed-view__box'>
+        <h1>Sorry</h1>
+        <p>There's Nothing To Be Found Here!</p>
+        <Link to='/'>Go Home...</Link>
+      </div>
     </div>
   );
 };

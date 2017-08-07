@@ -20,8 +20,8 @@ export default class Signup extends React.Component {
     let password = e.target.password.value.trim();
 
     if (password.length < 6) {
-      this.setState({err: 'Password must be at least 6 characters long!', success: false});
-      return;
+      //this.setState({err: 'Password must be at least 6 characters long!', success: false});
+      //return;
     }
 
     Accounts.createUser({
@@ -47,7 +47,7 @@ export default class Signup extends React.Component {
     console.log(pw.length);
 
     if (pw.length < 6) {
-      this.setState ({passwordOkay: false});
+      //this.setState ({passwordOkay: false});
     }
     else {
       this.setState ({passwordOkay: true});
@@ -67,21 +67,19 @@ export default class Signup extends React.Component {
 
   render() {
     return (
-      <div>
-        <h2>Signup For a New Short Lnk Account</h2>
-        {this.state.error ? <div>Error: {this.state.error}</div> : undefined}
-        {this.state.success ? <div>Success!</div> : undefined}
-        <form onSubmit={this.onSubmit.bind(this)}>
-          <div>
+      <div className='boxed-view'>
+        <div className='boxed-view__box'>
+          <h1>Join Short Lnk</h1>
+          {this.state.error ? <div>Error: {this.state.error}</div> : undefined}
+          {this.state.success ? <div>Success!</div> : undefined}
+          <form className='boxed-view__form' onSubmit={this.onSubmit.bind(this)}>
             <input type='text' name='email' placeholder='Your Best Email' />
-          </div>
-          <div>
             <input type='password' name='password' placeholder='Password' onChange={this.checkPassword.bind(this)} />
-            {!this.state.passwordOkay ? <span>password should be at least 6 characters long</span> : undefined}
-          </div>
-          <button disabled={!this.state.passwordOkay}>Create Account</button>
-        </form>
-        <div>Already have an Account? <Link to='/'>Login here!</Link></div>
+            {/*!this.state.passwordOkay ? <span>password should be at least 6 characters long</span> : undefined*/}
+            <button disabled={!this.state.passwordOkay}>Create Account</button>
+          </form>
+          <div>Already have an Account? <Link to='/'>Login here!</Link></div>
+        </div>
       </div>
     );
   }
