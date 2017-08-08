@@ -16,6 +16,13 @@
   text-decoration: none;
 }
 
+.button--underlined {
+  font-weight: 100;
+  text-decoration: underline;
+  text-transform: initial;
+  padding: unset;
+}
+
 .button--pill {
   background-color: transparent;
   border: 1px solid $button-pill-color;

@@ -1,0 +1,14 @@
+.title-bar {
+  background-color: $brand-primary;
+  color: white;
+}
+
+.title-bar__flex-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding-top: $space;
+}
+
+.title-bar__title {
+  line-height: 1.2;
+}
