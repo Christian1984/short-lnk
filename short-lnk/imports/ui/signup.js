@@ -70,13 +70,13 @@ export default class Signup extends React.Component {
       <div className='boxed-view'>
         <div className='boxed-view__box'>
           <h1>Join Short Lnk</h1>
-          {this.state.error ? <div>Error: {this.state.error}</div> : undefined}
-          {this.state.success ? <div>Success!</div> : undefined}
+          {this.state.error ? <p>Error: {this.state.error}</p> : undefined}
+          {this.state.success ? <p>Success!</p> : undefined}
           <form className='boxed-view__form' onSubmit={this.onSubmit.bind(this)}>
             <input type='text' name='email' placeholder='Your Best Email' />
             <input type='password' name='password' placeholder='Password' onChange={this.checkPassword.bind(this)} />
             {/*!this.state.passwordOkay ? <span>password should be at least 6 characters long</span> : undefined*/}
-            <button disabled={!this.state.passwordOkay}>Create Account</button>
+            <button className='button' disabled={!this.state.passwordOkay}>Create Account</button>
           </form>
           <div>Already have an Account? <Link to='/'>Login here!</Link></div>
         </div>

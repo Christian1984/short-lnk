@@ -64,9 +64,9 @@ export default class LinksListItem extends React.Component {
         <p><a href={ this.props.link.url }>{ this.props.link.url }</a></p>
         <p>{url}</p>
         {this.renderStats()}
-        <a href={url} target='_blank'>Visit</a>
-        <button ref='copy' data-clipboard-text={url}>{ this.state.copied ? 'Copied' : 'Copy' }</button>
-        <button ref='hide' onClick={ this.onHideClicked.bind(this) }>{ this.props.link.visible ? 'Hide' : 'Unhide'}</button>
+        <a className='button button--pill button--link' href={url} target='_blank'>Visit</a>
+        <button className='button button--pill' ref='copy' data-clipboard-text={url}>{ this.state.copied ? 'Copied' : 'Copy' }</button>
+        <button className='button button--pill' ref='hide' onClick={ this.onHideClicked.bind(this) }>{ this.props.link.visible ? 'Hide' : 'Unhide'}</button>
       </div>
     );
   }

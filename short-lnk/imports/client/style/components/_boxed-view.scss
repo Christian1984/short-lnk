@@ -7,8 +7,18 @@
   width: 100vw;
 }
 
+.boxed-view--modal {
+  background-color: fade-out($boxed-view-overlay-bg, 0.5);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
 .boxed-view__box {
   background-color: $boxed-view-box-bg;
+  outline: none;
   padding: $boxed-view-padding;
   text-align: center;
   width: $boxed-view-width;

@@ -39,12 +39,12 @@ export default class Login extends React.Component {
       <div className='boxed-view'>
         <div className='boxed-view__box'>
           <h1>Login to Short Lnk</h1>
-          {this.state.error ? <div>Error: {this.state.error}</div> : undefined}
-          {this.state.success ? <div>Success!</div> : undefined}
+          {this.state.error ? <p>Error: {this.state.error}</p> : undefined}
+          {this.state.success ? <p>Success!</p> : undefined}
           <form className='boxed-view__form' onSubmit={this.onSubmit.bind(this)}>
             <input type='text' name='email' placeholder='Email' />
             <input type='password' name='password' placeholder='Password' />
-            <button>Login</button>
+            <button className='button'>Login</button>
           </form>
           <div>Don't have an Account yet? <Link to='/signup'>Signup here!</Link></div>
         </div>

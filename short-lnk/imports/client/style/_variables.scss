@@ -1,5 +1,6 @@
 //colors
 $grey: #ddd;
+$brand-primary: #5b4681;
 
 //spacing
 $space: 1.4rem;
@@ -15,3 +16,15 @@ $boxed-view-overlay-bg: $grey;
 $boxed-view-box-bg: white;
 $boxed-view-width: 24rem;
 $boxed-view-padding: 2.4rem;
+
+//button
+$button-bg: $brand-primary;
+$button-color: white;
+$button-pill-color: $brand-primary;
+
+$button-secondary-bg: #f9f9f9;
+$button-secondary-color: #777;
+$button-secondary-border-color: $grey;
+
+//form inputs
+$input-space: $space;
