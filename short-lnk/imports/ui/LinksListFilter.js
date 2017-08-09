@@ -10,9 +10,9 @@ export default class LinksListFilter extends React.Component {
 
   componentDidMount() {
     this.filterTracker = Tracker.autorun(() => {
-      let showVisible = Session.get('showVisible');
-      this.setState({ showVisible });
+      this.setState({ showVisible: Session.get('showVisible') });
     });
+    window.filterTracker = this.filterTracker;
   }
 
   componentWillUnmount() {
@@ -20,14 +20,16 @@ export default class LinksListFilter extends React.Component {
   }
 
   onChange(e) {
-    Session.set('showVisible', !e.target.checked);
+    let showVisible = !e.target.checked;
+    Session.set('showVisible', showVisible);
   }
 
   render() {
     return (
       <div>
-        <label>
+        <label className='checkbox'>
           <input type='checkbox'
+            className='checkbox__box'
             onChange={ this.onChange.bind(this) }
             checked={ !this.state.showVisible }        
           />

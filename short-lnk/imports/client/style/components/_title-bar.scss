@@ -3,10 +3,14 @@
   color: white;
 }
 
-.title-bar__flex-wrapper {
+.title-bar__content-wrapper {
   display: flex;
   justify-content: space-between;
-  padding-top: $space;
+  padding: $space 0;
+
+  * {
+    margin: 0
+  }
 }
 
 .title-bar__title {

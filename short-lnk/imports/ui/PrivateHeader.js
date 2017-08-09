@@ -6,11 +6,9 @@ import { Accounts } from 'meteor/accounts-base';
 let PrivateHeader = (props) => {
   return (
     <div className='title-bar'>
-      <div className='wrapper'>
-        <div className='title-bar__flex-wrapper'>
-          <h1 className='title-bar__title'>{props.title}</h1>
-          <button className='button button--underlined' onClick={() => Accounts.logout()}>Logout</button>
-        </div>
+      <div className='wrapper title-bar__content-wrapper'>
+        <h1 className='title-bar__title'>{props.title}</h1>
+        <button className='button button--underlined' onClick={() => Accounts.logout()}>Logout</button>
       </div>
     </div>
     );

@@ -3,6 +3,7 @@ import { Session } from 'meteor/session';
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import FlipMove from 'react-flip-move';
 
 import { LinksCollection } from './../api/Links';
 
@@ -32,12 +33,24 @@ export default class LinksList extends React.Component {
   }
 
   renderListItems() {
+    if (this.state.links.length === 0) {
+      return (
+        <div className='item'>
+          <p className='item__status-msg'>No Links found!</p>
+        </div>
+      );
+    }
+
     return this.state.links.map((link) => <LinksListItem key={link._id} link={link} />);
   }
 
   render() {
-    console.log('render:', this.state.links);
-
-    return <div>{this.renderListItems()}</div>
+    return (
+      <div>
+        <FlipMove maintainContainerHeight={true}>
+          {this.renderListItems()}
+        </FlipMove>      
+      </div>
+    );
   }
 }

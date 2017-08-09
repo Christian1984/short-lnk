@@ -52,7 +52,7 @@ export default class LinksListItem extends React.Component {
     let lastVisitedAt = this.props.link.lastVisitedAt;
     let visitedAtMsg = lastVisitedAt ? `(visited ${moment(lastVisitedAt).fromNow()})` : undefined;
     return (
-      <p>{visitedCount} {visitedSuffix} {visitedAtMsg}</p>
+      <p className='item__msg'>{visitedCount} {visitedSuffix} {visitedAtMsg}</p>
     );
   }
 
@@ -60,9 +60,9 @@ export default class LinksListItem extends React.Component {
     let url = Meteor.absoluteUrl(this.props.link._id);
 
     return (
-      <div>
-        <p><a href={ this.props.link.url }>{ this.props.link.url }</a></p>
-        <p>{url}</p>
+      <div className='item'>
+        <h2><a href={ this.props.link.url }>{ this.props.link.url }</a></h2>
+        <p className='item__msg'>{url}</p>
         {this.renderStats()}
         <a className='button button--pill button--link' href={url} target='_blank'>Visit</a>
         <button className='button button--pill' ref='copy' data-clipboard-text={url}>{ this.state.copied ? 'Copied' : 'Copy' }</button>

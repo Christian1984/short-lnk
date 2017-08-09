@@ -8,10 +8,12 @@ import AddLinkForm from './AddLinkForm';
 export default function Link(props) {
   return (
     <div>
-      <PrivateHeader title='Your Links' />
-      <LinksListFilter />
-      <AddLinkForm />
-      <LinksList />
+      <PrivateHeader title='Short Lnk' />
+      <div className='wrapper'>
+        <LinksListFilter />
+        <AddLinkForm />
+        <LinksList />
+      </div>
     </div>
   );
 }
